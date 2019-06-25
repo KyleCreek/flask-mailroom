@@ -21,6 +21,11 @@ charlie.save()
 
 donors = [alice, bob, charlie]
 
+users_list = [user.name.title() for user in Donor.select()]
+for name in users_list:
+    print(name)
+#for user in Donor.select():
+#    print(user.name)
+
 for x in range(30):
     Donation(donor=random.choice(donors), value=random.randint(100, 10000)).save()
-

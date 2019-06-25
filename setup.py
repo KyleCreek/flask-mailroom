@@ -1,6 +1,7 @@
 import random
 
 from model import db, Donor, Donation 
+from passlib.hash import pbkdf2_sha256
 
 db.connect()
 
@@ -10,22 +11,19 @@ db.drop_tables([Donor, Donation])
 
 db.create_tables([Donor, Donation])
 
-alice = Donor(name="Alice")
+alice = Donor(name="Alice", password="password")
 alice.save()
 
-bob = Donor(name="Bob")
+bob = Donor(name="Bob", password="password2")
 bob.save()
 
-charlie = Donor(name="Charlie")
+charlie = Donor(name="Charlie",password="password3")
 charlie.save()
 
 donors = [alice, bob, charlie]
 
-users_list = [user.name.title() for user in Donor.select()]
-for name in users_list:
-    print(name)
-#for user in Donor.select():
-#    print(user.name)
+
 
 for x in range(30):
-    Donation(donor=random.choice(donors), value=random.randint(100, 10000)).save()
+    donor = random.choice(donors)
+    Donation(donor=donor.id, value=random.randint(100, 10000)).save()

@@ -1,7 +1,7 @@
 import random
 
 from model import db, Donor, Donation 
-from passlib.hash import pbkdf2_sha256
+#from passlib.hash import pbkdf2_sha256
 
 db.connect()
 
